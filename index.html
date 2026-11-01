@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dovud's sheet - Microsoft Excel</title>
+    <link rel="shortcut icon" href="image copy.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. TOP TITLE BAR -->
+    <header class="excel-titlebar">
+        <div class="titlebar-left">
+            <div class="excel-logo-icon" title="Microsoft Excel">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="4" fill="#0b5a2f"/>
+                    <path d="M14.5 7L9.5 17M9.5 7L14.5 17" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <!-- Quick Access Toolbar -->
+            <div class="quick-access-toolbar">
+                <button class="qat-btn" id="btn-qat-save" title="Сохранить (Ctrl + S)">
+                    <img src="images-Photoroom.png" alt="Save" style="width: 15px; height: 15px; filter: brightness(0) invert(1);">
+                </button>
+                <button class="qat-btn" id="btn-undo" title="Отменить (Ctrl + Z)" disabled>
+                    <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+                </button>
+                <button class="qat-btn" id="btn-redo" title="Повторить (Ctrl + Y)" disabled>
+                    <svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>
+                </button>
+            </div>
+
+            <!-- AutoSave Status -->
+            <div class="autosave-pill" title="Автосохранение включено">
+                <div class="toggle-dot"></div>
+                <span>Автосохранение</span>
+            </div>
+
+            <!-- Document Title -->
+            <div class="workbook-name-container">
+                <span class="workbook-name-input" id="workbook-title" contenteditable="true" title="Нажмите, чтобы переименовать файл">Книга1</span>
+                <span>- Excel</span>
+            </div>
+        </div>
+
+        <!-- Center Search Bar -->
+        <div class="titlebar-center">
+            <div class="search-box-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" class="search-input" id="global-search-input" placeholder="Поиск в таблице (Нажмите Enter)" spellcheck="false">
+            </div>
+        </div>
+
+        <!-- Right Controls (User & Window) -->
+        <div class="titlebar-right">
+            <div class="user-badge" title="Профиль пользователя">
+                <div class="user-avatar">D</div>
+                <span>Dovud</span>
+            </div>
+            <div class="window-controls">
+                <div class="win-btn" title="Свернуть">─</div>
+                <div class="win-btn" title="Развернуть">▢</div>
+                <div class="win-btn close" title="Закрыть">✕</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. RIBBON TABS BAR -->
+    <nav class="ribbon-tabs-bar">
+        <a href="excel.html" class="ribbon-tab file-tab" title="Перейти в меню Файл (Backstage)">
+            <span>Файл</span>
+        </a>
+        <button class="ribbon-tab active" data-tab="home">Главная</button>
+        <button class="ribbon-tab" data-tab="insert">Вставка</button>
+        <button class="ribbon-tab" data-tab="layout">Разметка страницы</button>
+        <button class="ribbon-tab" data-tab="formulas">Формулы</button>
+        <button class="ribbon-tab" data-tab="data">Данные</button>
+        <button class="ribbon-tab" data-tab="review">Рецензирование</button>
+        <button class="ribbon-tab" data-tab="view">Вид</button>
+        <button class="ribbon-tab" data-tab="help">Справка</button>
+    </nav>
+
+    <!-- 3. RIBBON BODY & PANELS -->
+    <section class="ribbon-body">
+        <!-- TAB 1: ГЛАВНАЯ (HOME) -->
+        <div class="ribbon-panel active" id="panel-home">
+            <!-- Group: Буфер обмена (Clipboard) -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="big-tool-btn" id="btn-paste" title="Вставить (Ctrl + V)">
+                        <svg viewBox="0 0 24 24"><path d="M19 2h-4.18C14.4 .84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z"/></svg>
+                        <span>Вставить</span>
+                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <button class="tool-btn" id="btn-cut" title="Вырезать (Ctrl + X)">
+                            <svg viewBox="0 0 24 24"><path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-7.5c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zM19 3l-6 6 2 2 7-7V3h-3z"/></svg>
+                            <span>Вырезать</span>
+                        </button>
+                        <button class="tool-btn" id="btn-copy" title="Копировать (Ctrl + C)">
+                            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            <span>Копировать</span>
+                        </button>
+                    </div>
+                </div>
+                <span class="ribbon-group-title">Буфер обмена</span>
+            </div>
+
+            <!-- Group: Шрифт (Font) with 20+ fonts, sizes up to 72, grow/shrink buttons & borders -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <select class="ribbon-select select-font-family" id="select-font-family" title="Шрифт">
+                        <option value="Calibri" selected>Calibri</option>
+                        <option value="Aptos">Aptos</option>
+                        <option value="Aptos Display">Aptos Display</option>
+                        <option value="Segoe UI">Segoe UI</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Arial Black">Arial Black</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Consolas">Consolas</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Lucida Console">Lucida Console</option>
+                        <option value="Century Gothic">Century Gothic</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Franklin Gothic Medium">Franklin Gothic</option>
+                    </select>
+
+                    <select class="ribbon-select select-font-size" id="select-font-size" title="Размер шрифта">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11" selected>11</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                        <option value="36">36</option>
+                        <option value="48">48</option>
+                        <option value="72">72</option>
+                    </select>
+
+                    <button class="tool-btn" id="btn-font-grow" title="Увеличить размер шрифта" style="font-weight: bold; font-size: 13px;">A<sup>▲</sup></button>
+                    <button class="tool-btn" id="btn-font-shrink" title="Уменьшить размер шрифта" style="font-weight: bold; font-size: 11px;">A<sub>▼</sub></button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-bold" title="Полужирный (Ctrl + B)"><b>Ж</b></button>
+                    <button class="tool-btn" id="btn-italic" title="Курсив (Ctrl + I)"><i>К</i></button>
+                    <button class="tool-btn" id="btn-underline" title="Подчеркнутый (Ctrl + U)"><u>Ч</u></button>
+
+                    <!-- Borders Dropdown Tool -->
+                    <div class="color-picker-wrapper" title="Границы ячеек">
+                        <button class="tool-btn" id="btn-borders-main" title="Все границы">
+                            <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm2 2v6h6V5H5zm8 0v6h6V5h-6zm6 8h-6v6h6v-6zm-8 6v-6H5v6h6z"/></svg>
+                        </button>
+                        <button class="tool-btn color-btn-arrow" id="btn-toggle-borders-menu">▾</button>
+                        <div class="excel-menu-dropdown" id="dropdown-borders-menu">
+                            <div class="dropdown-item" data-border="all"><span>田 Все границы</span></div>
+                            <div class="dropdown-item" data-border="thick"><span>▢ Толстая внешняя граница</span></div>
+                            <div class="dropdown-item" data-border="bottom"><span>_ Нижняя граница</span></div>
+                            <div class="dropdown-item" data-border="none"><span>✕ Нет границы</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Color Fill Picker (Bucket) with dropdown -->
+                    <div class="color-picker-wrapper" id="wrapper-bg-color" title="Цвет заливки ячейки">
+                        <button class="tool-btn color-btn-main" id="btn-apply-bg-color" title="Выбрать цвет заливки">
+                            <svg viewBox="0 0 24 24"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/></svg>
+                            <span class="color-bar" id="color-bar-bg"></span>
+                        </button>
+                        <button class="tool-btn color-btn-arrow" id="btn-toggle-bg-palette">▾</button>
+
+                        <div class="color-palette-dropdown" id="dropdown-bg-palette">
+                            <div class="color-palette-title">Цвета темы</div>
+                            <div class="color-swatches-grid" id="grid-bg-theme-colors"></div>
+                            <div class="color-palette-title">Стандартные цвета</div>
+                            <div class="color-swatches-grid" id="grid-bg-standard-colors"></div>
+                            <div class="color-action-item" id="btn-bg-no-color">
+                                <span style="display:inline-block; width:14px; height:14px; border:1px solid #aaa; background:white; position:relative; text-align:center; line-height:12px; color:red; font-size:10px;">/</span>
+                                <span>Нет заливки</span>
+                            </div>
+                            <div class="color-action-item native-color-input-btn">
+                                <span>🎨 Другие цвета...</span>
+                                <input type="color" id="input-bg-native" value="#ffff00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text Color Picker (A) with dropdown -->
+                    <div class="color-picker-wrapper" id="wrapper-text-color" title="Цвет текста">
+                        <button class="tool-btn color-btn-main" id="btn-apply-text-color" title="Выбрать цвет текста">
+                            <b style="font-size: 13px;">A</b>
+                            <span class="color-bar-text" id="color-bar-text"></span>
+                        </button>
+                        <button class="tool-btn color-btn-arrow" id="btn-toggle-text-palette">▾</button>
+
+                        <div class="color-palette-dropdown" id="dropdown-text-palette">
+                            <div class="color-palette-title">Цвета темы</div>
+                            <div class="color-swatches-grid" id="grid-text-theme-colors"></div>
+                            <div class="color-palette-title">Стандартные цвета</div>
+                            <div class="color-swatches-grid" id="grid-text-standard-colors"></div>
+                            <div class="color-action-item" id="btn-text-auto-color">
+                                <span style="display:inline-block; width:14px; height:14px; background:#000; border-radius:1px;"></span>
+                                <span>Авто (Черный)</span>
+                            </div>
+                            <div class="color-action-item native-color-input-btn">
+                                <span>🎨 Другие цвета...</span>
+                                <input type="color" id="input-text-native" value="#d83b01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span class="ribbon-group-title">Шрифт</span>
+            </div>
+
+            <!-- Group: Выравнивание (Alignment) -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-align-left" title="По левому краю">
+                        <svg viewBox="0 0 24 24"><path d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"/></svg>
+                    </button>
+                    <button class="tool-btn" id="btn-align-center" title="По центру">
+                        <svg viewBox="0 0 24 24"><path d="M7 15v2h10v-2H7zm-4 6h18v-2H3v2zm0-8h18v-2H3v2zm4-6v2h10V7H7zM3 3v2h18V3H3z"/></svg>
+                    </button>
+                    <button class="tool-btn" id="btn-align-right" title="По правому краю">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"/></svg>
+                    </button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-merge-cells" title="Объединить и поместить в центре">
+                        <span>Объединить</span>
+                    </button>
+                    <button class="tool-btn" id="btn-wrap-text" title="Перенос текста">
+                        <span>Перенос</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Выравнивание</span>
+            </div>
+
+            <!-- Group: Число (Number) -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <select class="ribbon-select select-number-format" id="select-number-format">
+                        <option value="general">Общий</option>
+                        <option value="number">Числовой</option>
+                        <option value="currency">Денежный ($)</option>
+                        <option value="percent">Процентный (%)</option>
+                    </select>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-fmt-dollar" title="Денежный формат ($)">$</button>
+                    <button class="tool-btn" id="btn-fmt-percent" title="Процентный формат (%)">%</button>
+                    <button class="tool-btn" id="btn-fmt-comma" title="Разделитель групп">,</button>
+                </div>
+                <span class="ribbon-group-title">Число</span>
+            </div>
+
+            <!-- Group: Редактирование (Editing / Formulas / Search) -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-autosum" title="Автосумма (Суммирует ячейки)" style="font-weight: bold; color: #107c41;">
+                        <span style="font-size: 15px;">Σ</span>
+                        <span>Автосумма</span>
+                    </button>
+                    <button class="tool-btn" id="btn-find-replace" title="Найти в таблице (Ctrl + F)">
+                        <span>🔍 Найти</span>
+                    </button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-clear" title="Очистить ячейку (Сброс размера и стилей)">Очистить</button>
+                    <button class="tool-btn" id="btn-sort-asc" title="Сортировка А-Я">А➔Я</button>
+                </div>
+                <span class="ribbon-group-title">Редактирование</span>
+            </div>
+
+            <!-- Group: Управление документом & Экспорт -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn clean-btn" id="btn-clean-sheet" title="Создать пустую чистую книгу (Очистить всё)">
+                        <span>📄 Чистый лист</span>
+                    </button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-export-csv" title="Скачать таблицу (Только заполненные данные)">
+                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        <span>Скачать CSV</span>
+                    </button>
+                    <button class="tool-btn" id="btn-save-mysql" title="Сохранить в MySQL базу данных">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 4.02 2 6.5v11C2 19.98 6.48 22 12 22s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm0 2c4.41 0 8 1.57 8 2.5S16.41 9 12 9s-8-1.57-8-2.5S7.59 4 12 4zm8 13.5c0 .93-3.59 2.5-8 2.5s-8-1.57-8-2.5V15c1.78 1.23 4.7 2 8 2s6.22-.77 8-2v2.5zm0-4c0 .93-3.59 2.5-8 2.5s-8-1.57-8-2.5V11c1.78 1.23 4.7 2 8 2s6.22-.77 8-2v2.5z"/></svg>
+                        <span>В MySQL</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Документ & Экспорт</span>
+            </div>
+        </div>
+
+        <!-- TAB 2: ВСТАВКА (INSERT) -->
+        <div class="ribbon-panel" id="panel-insert">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="big-tool-btn" id="btn-insert-table" title="Отформатировать как таблицу">
+                        <svg viewBox="0 0 24 24"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h10v2H7v-2z"/></svg>
+                        <span>Таблица</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Таблицы</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="big-tool-btn" id="btn-chart-bar" title="Вставить столбчатую гистограмму">
+                        <svg viewBox="0 0 24 24"><path d="M4 19h16v2H4v-2zm2-4h2v3H6v-3zm4-5h2v8h-2v-8zm4-4h2v12h-2V6zm4 8h2v4h-2v-4z"/></svg>
+                        <span>Гистограмма</span>
+                    </button>
+                    <button class="big-tool-btn" id="btn-chart-pie" title="Вставить круговую диаграмму">
+                        <svg viewBox="0 0 24 24"><path d="M11 2v20c-5.07-.5-9-4.79-9-10s3.93-9.5 9-10zm2 0v8h8c-.47-4.44-4-7.94-8-8zm0 10v8c4-.06 7.53-3.56 8-8h-8z"/></svg>
+                        <span>Круговая</span>
+                    </button>
+                    <button class="big-tool-btn" id="btn-chart-line" title="Вставить график">
+                        <svg viewBox="0 0 24 24"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg>
+                        <span>График</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Диаграммы</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-insert-image" title="Вставить изображение из файла">
+                        <span>🖼 Картинка</span>
+                    </button>
+                    <button class="tool-btn" id="btn-insert-date" title="Вставить текущую дату">
+                        <span>📅 Дата</span>
+                    </button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="insertSymbol('✓')" title="Символ галочки">✓</button>
+                    <button class="tool-btn" onclick="insertSymbol('★')" title="Звезда">★</button>
+                    <button class="tool-btn" onclick="insertSymbol('Σ')" title="Сумма">Σ</button>
+                    <button class="tool-btn" onclick="insertSymbol('€')" title="Евро">€</button>
+                    <button class="tool-btn" onclick="insertSymbol('%')" title="Процент">%</button>
+                </div>
+                <span class="ribbon-group-title">Иллюстрации & Символы</span>
+            </div>
+        </div>
+
+        <!-- TAB 3: РАЗМЕТКА СТРАНИЦЫ (PAGE LAYOUT) -->
+        <div class="ribbon-panel" id="panel-layout">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;">
+                        <input type="checkbox" id="chk-show-gridlines" checked>
+                        <span>Сетка таблицы</span>
+                    </label>
+                </div>
+                <div class="ribbon-controls-row">
+                    <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;">
+                        <input type="checkbox" id="chk-show-headings" checked>
+                        <span>Заголовки (A, B, C / 1, 2, 3)</span>
+                    </label>
+                </div>
+                <span class="ribbon-group-title">Параметры листа</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="window.print()" title="Печать документа (Ctrl + P)">
+                        <span>🖨 Печать листа</span>
+                    </button>
+                    <button class="tool-btn" onclick="showToast('Ориентация: Альбомная установлена')" title="Ориентация">
+                        <span>📄 Альбомная</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Параметры печати</span>
+            </div>
+        </div>
+
+        <!-- TAB 4: ФОРМУЛЫ (FORMULAS) - MASSIVE MATH LIBRARY -->
+        <div class="ribbon-panel" id="panel-formulas">
+            <!-- Group: Основные формулы -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=SUM(')" title="Сумма: =SUM(A1:A5)">=SUM()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=AVERAGE(')" title="Среднее: =AVERAGE(A1:A5)">=AVERAGE()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=COUNT(')" title="Количество: =COUNT(A1:A5)">=COUNT()</button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=MAX(')" title="Максимум: =MAX(A1:A5)">=MAX()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=MIN(')" title="Минимум: =MIN(A1:A5)">=MIN()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=IF(')" title="Условие: =IF(A1>10, 1, 0)">=IF()</button>
+                </div>
+                <span class="ribbon-group-title">Основные формулы</span>
+            </div>
+
+            <!-- Group: Продвинутая математика -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=PRODUCT(')" title="Произведение: =PRODUCT(A1:A3)">=PRODUCT()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=SQRT(')" title="Квадратный корень: =SQRT(16)">=SQRT()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=POWER(')" title="Степень: =POWER(A1, 2)">=POWER()</button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=ROUND(')" title="Округление: =ROUND(A1, 2)">=ROUND()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=ABS(')" title="Модуль числа: =ABS(-10)">=ABS()</button>
+                    <button class="tool-btn" onclick="insertFormulaTemplate('=MOD(')" title="Остаток от деления: =MOD(10, 3)">=MOD()</button>
+                </div>
+                <span class="ribbon-group-title">Математика & Расчеты</span>
+            </div>
+
+            <!-- Group: Зависимости формул -->
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-toggle-show-formulas" title="Показать формулы во всех ячейках">
+                        <span>👁 Показать формулы</span>
+                    </button>
+                </div>
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-recalculate-all" title="Пересчитать все формулы">
+                        <span>🔄 Пересчитать всё</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Зависимости формул</span>
+            </div>
+        </div>
+
+        <!-- TAB 5: ДАННЫЕ (DATA) -->
+        <div class="ribbon-panel" id="panel-data">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-data-sort-asc" title="Сортировать по возрастанию">
+                        <span>⬇ Сортировка А-Я</span>
+                    </button>
+                    <button class="tool-btn" id="btn-data-sort-desc" title="Сортировать по убыванию">
+                        <span>⬆ Сортировка Я-А</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Сортировка</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-remove-duplicates" title="Удалить дубликаты">
+                        <span>Удалить дубликаты</span>
+                    </button>
+                    <button class="tool-btn" id="btn-trim-spaces" title="Очистить лишние пробелы">
+                        <span>Очистить пробелы</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Работа с данными</span>
+            </div>
+        </div>
+
+        <!-- TAB 6: РЕЦЕНЗИРОВАНИЕ (REVIEW) -->
+        <div class="ribbon-panel" id="panel-review">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-add-comment" title="Добавить примечание к ячейке">
+                        <span>💬 Создать примечание</span>
+                    </button>
+                    <button class="tool-btn" id="btn-delete-comment" title="Удалить примечание">
+                        <span>Удалить примечание</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Примечания</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-protect-sheet" title="Защитить текущий лист">
+                        <span>🔒 Защитить лист</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Защита</span>
+            </div>
+        </div>
+
+        <!-- TAB 7: ВИД (VIEW) -->
+        <div class="ribbon-panel" id="panel-view">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;">
+                        <input type="checkbox" id="chk-show-formulabar" checked>
+                        <span>Строка формул</span>
+                    </label>
+                </div>
+                <span class="ribbon-group-title">Показ</span>
+            </div>
+
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-zoom-100" title="Масштаб 100%">100%</button>
+                    <button class="tool-btn" id="btn-zoom-in" title="Увеличить">+</button>
+                    <button class="tool-btn" id="btn-zoom-out" title="Уменьшить">-</button>
+                </div>
+                <span class="ribbon-group-title">Масштаб</span>
+            </div>
+        </div>
+
+        <!-- TAB 8: СПРАВКА (HELP) -->
+        <div class="ribbon-panel" id="panel-help">
+            <div class="ribbon-group">
+                <div class="ribbon-controls-row">
+                    <button class="tool-btn" id="btn-help-shortcuts">
+                        <span>⌨ Горячие клавиши</span>
+                    </button>
+                    <button class="tool-btn" onclick="showToast('Excel Web v4.0 - Dovud Edition')">
+                        <span>ℹ О программе</span>
+                    </button>
+                </div>
+                <span class="ribbon-group-title">Справка Excel</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FORMULA BAR -->
+    <section class="formula-bar-container" id="formula-bar-wrapper">
+        <input type="text" class="name-box" id="name-box" value="A1" title="Имя ячейки (введите адрес и нажмите Enter)" spellcheck="false">
+
+        <div class="formula-actions">
+            <button class="fx-btn" id="btn-fx-cancel" title="Отмена (Esc)">✕</button>
+            <button class="fx-btn" id="btn-fx-accept" title="Ввод (Enter)">✓</button>
+            <button class="fx-btn" id="btn-fx-insert" title="Вставить функцию">fx</button>
+        </div>
+
+        <div class="formula-input-container">
+            <input type="text" class="formula-input" id="formula-input" placeholder="Введите значение или формулу (=SUM(A1:A5), =PRODUCT, =SQRT)" spellcheck="false">
+        </div>
+    </section>
+
+    <!-- 5. MAIN SPREADSHEET GRID -->
+    <main class="spreadsheet-container" id="spreadsheet-container">
+        <table class="excel-grid-table" id="excel-grid-table">
+            <thead id="grid-thead">
+                <tr id="grid-thead-tr">
+                    <!-- Column headers generated by script.js (A to Z) -->
+                </tr>
+            </thead>
+            <tbody id="grid-tbody">
+                <!-- Rows generated dynamically by script.js -->
+            </tbody>
+        </table>
+
+        <!-- Real Excel AutoFill Drag Handle (+) Element -->
+        <div id="excel-fill-handle" title="Автозаполнение (Потяните вниз для серии 1, 2, 3...)"></div>
+    </main>
+
+    <!-- 6. BOTTOM SHEET TABS BAR -->
+    <footer class="sheet-tabs-container">
+        <button class="sheet-nav-btn" title="Предыдущий лист">◀</button>
+        <button class="sheet-nav-btn" title="Следующий лист">▶</button>
+
+        <div class="sheets-list" id="sheets-list">
+            <div class="sheet-tab-item active" id="tab-sheet1">Лист1</div>
+        </div>
+
+        <button class="add-sheet-btn" id="btn-add-sheet" title="Создать новый лист">+</button>
+    </footer>
+
+    <!-- 7. STATUS BAR -->
+    <div class="excel-statusbar">
+        <div class="statusbar-left">
+            <span>ГОТОВО</span>
+        </div>
+
+        <div class="statusbar-center">
+            <div class="stat-item">
+                <span>СРЕДНЕЕ:</span>
+                <span class="stat-val" id="stat-avg">0</span>
+            </div>
+            <div class="stat-item">
+                <span>КОЛИЧЕСТВО:</span>
+                <span class="stat-val" id="stat-count">0</span>
+            </div>
+            <div class="stat-item">
+                <span>СУММА:</span>
+                <span class="stat-val" id="stat-sum">0</span>
+            </div>
+        </div>
+
+        <div class="statusbar-right">
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="btn-zoom-minus">-</button>
+                <input type="range" class="zoom-slider" id="zoom-slider" min="50" max="150" value="100">
+                <button class="zoom-btn" id="btn-zoom-plus">+</button>
+                <span id="zoom-val" style="min-width: 36px; text-align: right;">100%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden image file input -->
+    <input type="file" id="image-file-input" accept="image/*" style="display: none;">
+
+    <!-- CHART MODAL -->
+    <div class="excel-modal-backdrop" id="chart-modal">
+        <div class="excel-modal">
+            <div class="excel-modal-header">
+                <span id="chart-modal-title">Диаграмма Excel</span>
+                <button class="excel-modal-close" id="btn-close-chart-modal">✕</button>
+            </div>
+            <div class="excel-modal-body">
+                <canvas id="chart-canvas" width="480" height="260" style="background: #ffffff; border: 1px solid #e1dfdd; border-radius: 4px;"></canvas>
+                <div style="font-size: 11.5px; color: #666;" id="chart-info-text">Показаны данные из выбранных ячеек.</div>
+            </div>
+            <div class="excel-modal-footer">
+                <button class="modal-btn" id="btn-download-chart">Скачать график (PNG)</button>
+                <button class="modal-btn primary" id="btn-ok-chart">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIND MODAL -->
+    <div class="excel-modal-backdrop" id="find-modal">
+        <div class="excel-modal" style="width: 380px;">
+            <div class="excel-modal-header">
+                <span>Найти и выделить</span>
+                <button class="excel-modal-close" id="btn-close-find-modal">✕</button>
+            </div>
+            <div class="excel-modal-body">
+                <label style="font-size: 12px; font-weight: 500;">Найти:</label>
+                <input type="text" id="find-text-input" class="search-input" style="background:#f8f9fa; color:#333; border:1px solid #ccc; height:32px; padding:0 8px;" placeholder="Введите текст для поиска">
+            </div>
+            <div class="excel-modal-footer">
+                <button class="modal-btn" id="btn-find-prev">Назад</button>
+                <button class="modal-btn primary" id="btn-find-next">Найти далее</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div class="excel-toast" id="excel-toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
